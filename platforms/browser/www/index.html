@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    	<meta name="format-detection" content="telephone=no" />
+    	<meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+
+        <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/ionicons/css/ionicons.css">
+        <link rel="stylesheet" type="text/css" href="css/material-design-iconic-font/css/material-design-iconic-font.css">
+        <link rel="stylesheet" type="text/css" href="css/material-design-iconic-font/css/material-design-iconic-font.css">
+        <link rel="stylesheet" type="text/css" href="css/font_awesome/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="css/onsen-css-components.css">
+        <link rel="stylesheet" type="text/css" href="css/onsen.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <title>Billing Inquiry</title>
+        <style type="text/css">
+        	ons-page .bg{
+        		width: 100%;
+        		height: 100%;
+        		background-image:url('img/background.jpg');
+        		background-repeat: no-repeat;
+        		background-position: fixed;
+        		background-size: cover;
+        		position: absolute;
+        		filter: blur(.4em);
+        		-webkit-filter: blur(.4em);
+				-moz-filter: blur(.4em);
+				-o-filter: blur(.4em);
+				-ms-filter: blur(.4em);
+				z-index: -2;
+        	}
+        	#form{
+        		height: 100%;
+        	}
+
+        </style>
+    </head>
+    <body>
+
+    <ons-navigator swipeable id="appNavigator" page="home.html"></ons-navigator>
+
+	<template id="home.html">
+	  <ons-page id="home">
+	  	<div class="bg"></div>
+	    <ons-toolbar>
+	       <div class="center"><img src="img/logo.png" width="35" height="30"></div>
+	    </ons-toolbar>
+
+	     <div class="text-center p-5" id="data">
+	        <ons-list >
+			  <ons-list-item modifier="chevron" tappable onclick="gotoPage();"> <ons-icon icon="md-account" style="font-size: 30px;"></ons-icon> &nbsp; 0000-0000</ons-list-item>
+
+			</ons-list>
+
+	    </div>
+	  </ons-page>
+
+	</template>
+
+	<template id="account.html">
+	  <ons-page id="account">
+	    <ons-toolbar>
+	      <div class="left">
+	      	<ons-back-button>Back</ons-back-button>
+	      </div>
+
+	     <div class="center"><img src="img/logo.png" width="35" height="30"></div>
+	    </ons-toolbar>
+
+	    <ons-tabbar swipeable position="bottom" style="z-index: -1;">
+		    <ons-tab page="current_billing.html" label="Current Billing" icon="ion-ios-bolt" active active-icon="ion-ios-bolt">
+		    </ons-tab>
+		    <ons-tab page="bills.html" label="Bills" icon="ion-social-bitcoin" active-icon="ion-social-bitcoin">
+		    </ons-tab>
+		    <ons-tab  page="payments.html" label="Payments" icon="ion-cash" active-icon="ion-cash">
+		    </ons-tab>
+		    <ons-tab  page="non_powerbill.html" label="Non-Power-Bill Payments" icon="md-balance-wallet" active-icon="md-balance-wallet">
+		    </ons-tab>
+	    </ons-tabbar>
+
+	  </ons-page>
+	</template>
+
+    <template id="bills.html">
+        <ons-page>
+
+        <div class="bg"></div>
+
+
+               <!-- BODY HERE -->
+        <div class="center"><h1>BILLS</h1></div>
+
+        </ons-page>
+    </template>
+
+    <template id="current_billing.html">
+        <ons-page>
+             <div class="bg"></div>
+
+               <!-- BODY HERE -->
+            <div class="center"><h1>CURRENT BILLING</h1></div>
+
+        </ons-page>
+    </template>
+
+    <template id="payments.html">
+        <ons-page>
+             <div class="bg"></div>
+
+               <!-- BODY HERE -->
+            <div class="center"><h1>PAYMENTS</h1></div>
+
+        </ons-page>
+    </template>
+
+    <template id="non_powerbill.html">
+        <ons-page>
+             <div class="bg"></div>
+
+               <!-- BODY HERE -->
+            <div class="center"><h1>NON POWER BILLs</h1></div>
+
+        </ons-page>
+    </template>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/onsenui.min.js"></script>
+    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <!-- <script type="text/javascript" src="js/vue.js"></script> -->
+    <script type="text/javascript">
+    	   function gotoPage(){
+    	  	document.querySelector('#appNavigator').pushPage('account.html');
+		  }
+		  
+    </script>
+    <script type="text/javascript">
+    	
+    	function myFunc(myObj) {
+    		
+    		
+    		if(myObj == "INVALID USER")
+    		{
+    			ons.notification.alert("Invalid Username or Password.");
+    		}else if(myObj == "AUTH")
+    		{
+    			ons.notification.alert(""+myObj);
+    		}
+		}
+
+		function login(){
+			
+    		var username = $("#username").val();
+    		var password = $("#password").val();
+
+    		if(username == "")
+    		{
+    			ons.notification.alert("Username is required.");
+    		}else if(password == "")
+    		{
+				ons.notification.alert("Password is required.");
+    		}else{
+    			
+				var s = document.createElement("script");
+	    		s.type= "text/javascript";
+	    		s.id="request_script";
+				s.src = "http://172.16.0.26/casurecowan/api/auth/mobile/login/"+username+"/"+password;
+				document.body.appendChild(s);
+
+    		}
+    	}
+    	
+    	
+    </script>
+    <!-- <script type="text/javascript" src="http://172.16.0.26/casurecowan/Auth/mobile/login"></script> -->
+    
+    
+    </body>
+</html>
